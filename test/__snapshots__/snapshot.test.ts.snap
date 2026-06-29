@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`example stage CloudFormation snapshots ctrl-api matches snapshot 1`] = `
+exports[`example stage CloudFormation snapshots test-api matches snapshot 1`] = `
 {
   "Outputs": {
     "compliantapiEndpoint02CC07C5": {
@@ -288,7 +288,7 @@ exports[`example stage CloudFormation snapshots ctrl-api matches snapshot 1`] = 
         "Scope": "REGIONAL",
         "VisibilityConfig": {
           "CloudWatchMetricsEnabled": true,
-          "MetricName": "ctrl-compliant-api-waf",
+          "MetricName": "test-compliant-api-waf",
           "SampledRequestsEnabled": true,
         },
       },
@@ -355,7 +355,7 @@ exports[`example stage CloudFormation snapshots ctrl-api matches snapshot 1`] = 
 }
 `;
 
-exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`] = `
+exports[`example stage CloudFormation snapshots test-compute matches snapshot 1`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -365,7 +365,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
     },
   },
   "Resources": {
-    "scheduledworkercompliantscheduledworkerMetricFilterctrlcompliantscheduledworkerMaxMemorySize2D0F9DCB": {
+    "scheduledworkercompliantscheduledworkerMetricFiltertestcompliantscheduledworkerMaxMemorySize1573352B": {
       "Properties": {
         "FilterPattern": "[report_name="REPORT", request_id_name="RequestId:", request_id_value,duration_name="Duration:", duration_value, duration_unit="ms",billed_duration_name_1="Billed",bill_duration_name_2="Duration:", billed_duration_value, billed_duration_unit="ms",memory_size_name_1="Memory", memory_size_name_2="Size:", memory_size_value, memory_size_unit="MB", max_memory_used_name_1="Max", max_memory_used_name_2="Memory", max_memory_used_name_3="Used:", max_memory_used_value, ...]",
         "LogGroupName": {
@@ -373,7 +373,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
         },
         "MetricTransformations": [
           {
-            "MetricName": "ctrl-compliant-scheduled-worker-MaxMemorySize",
+            "MetricName": "test-compliant-scheduled-worker-MaxMemorySize",
             "MetricNamespace": "ApplicationService/Lambda",
             "MetricValue": "$memory_size_value",
           },
@@ -381,7 +381,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
       },
       "Type": "AWS::Logs::MetricFilter",
     },
-    "scheduledworkercompliantscheduledworkerMetricFilterctrlcompliantscheduledworkerMaxMemoryUsedE578FC76": {
+    "scheduledworkercompliantscheduledworkerMetricFiltertestcompliantscheduledworkerMaxMemoryUsed25476DF9": {
       "Properties": {
         "FilterPattern": "[report_name="REPORT", request_id_name="RequestId:", request_id_value,duration_name="Duration:", duration_value, duration_unit="ms",billed_duration_name_1="Billed",bill_duration_name_2="Duration:", billed_duration_value, billed_duration_unit="ms",memory_size_name_1="Memory", memory_size_name_2="Size:", memory_size_value, memory_size_unit="MB", max_memory_used_name_1="Max", max_memory_used_name_2="Memory", max_memory_used_name_3="Used:", max_memory_used_value, ...]",
         "LogGroupName": {
@@ -389,7 +389,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
         },
         "MetricTransformations": [
           {
-            "MetricName": "ctrl-compliant-scheduled-worker-MaxMemoryUsed",
+            "MetricName": "test-compliant-scheduled-worker-MaxMemoryUsed",
             "MetricNamespace": "ApplicationService/Lambda",
             "MetricValue": "$max_memory_used_value",
           },
@@ -402,16 +402,16 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
       "Properties": {
         "ActionsEnabled": false,
         "AlarmDescription": "This is an auto-cut alarm created by CDK.",
-        "AlarmName": "ctrl-compliant-scheduled-worker Lambda Error Count",
+        "AlarmName": "test-compliant-scheduled-worker Lambda Error Count",
         "ComparisonOperator": "GreaterThanThreshold",
         "Dimensions": [
           {
             "Name": "FunctionName",
-            "Value": "ctrl-compliant-scheduled-worker",
+            "Value": "test-compliant-scheduled-worker",
           },
         ],
         "EvaluationPeriods": 1,
-        "MetricName": "ctrl-compliant-scheduled-worker-Errors",
+        "MetricName": "test-compliant-scheduled-worker-Errors",
         "Namespace": "AWS/Lambda",
         "Period": 60,
         "Statistic": "Sum",
@@ -433,7 +433,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
         "Code": {
           "ZipFile": "exports.handler = async () => ({ statusCode: 200 });",
         },
-        "FunctionName": "ctrl-compliant-scheduled-worker",
+        "FunctionName": "test-compliant-scheduled-worker",
         "Handler": "index.handler",
         "LoggingConfig": {
           "LogGroup": {
@@ -456,7 +456,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
     "scheduledworkercompliantscheduledworkerloggroupFF931A4D": {
       "DeletionPolicy": "Delete",
       "Properties": {
-        "LogGroupName": "/aws/lambda/ctrl-compliant-scheduled-worker",
+        "LogGroupName": "/aws/lambda/test-compliant-scheduled-worker",
         "RetentionInDays": 365,
       },
       "Type": "AWS::Logs::LogGroup",
@@ -467,7 +467,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
       "Properties": {
         "ActionsEnabled": false,
         "AlarmDescription": "This is an auto-cut alarm created by CDK.",
-        "AlarmName": "ctrl-compliant-scheduled-worker Memory Utilization Rate",
+        "AlarmName": "test-compliant-scheduled-worker Memory Utilization Rate",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "EvaluationPeriods": 3,
         "Metrics": [
@@ -481,7 +481,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
             "Id": "memoryUsed",
             "MetricStat": {
               "Metric": {
-                "MetricName": "ctrl-compliant-scheduled-worker-MaxMemoryUsed",
+                "MetricName": "test-compliant-scheduled-worker-MaxMemoryUsed",
                 "Namespace": "AWS/Lambda",
               },
               "Period": 60,
@@ -493,7 +493,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
             "Id": "memorySize",
             "MetricStat": {
               "Metric": {
-                "MetricName": "ctrl-compliant-scheduled-worker-MaxMemorySize",
+                "MetricName": "test-compliant-scheduled-worker-MaxMemorySize",
                 "Namespace": "ApplicationService/Lambda",
               },
               "Period": 60,
@@ -536,7 +536,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
           ],
           "Version": "2012-10-17",
         },
-        "RoleName": "ctrl-compliant-scheduled-worker-role",
+        "RoleName": "test-compliant-scheduled-worker-role",
       },
       "Type": "AWS::IAM::Role",
     },
@@ -591,14 +591,14 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
       },
       "Type": "AWS::IAM::Policy",
     },
-    "scheduledworkerctrlcompliantschedule7005BEE9": {
+    "scheduledworkertestcompliantschedule62B3DB90": {
       "Properties": {
         "Description": "Triggers the compliant-schedule Lambda on a schedule",
         "FlexibleTimeWindow": {
           "MaximumWindowInMinutes": 5,
           "Mode": "FLEXIBLE",
         },
-        "Name": "compliant-schedule-ctrl",
+        "Name": "compliant-schedule-test",
         "ScheduleExpression": "rate(1 hour)",
         "ScheduleExpressionTimezone": "UTC",
         "State": "ENABLED",
@@ -612,7 +612,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
           "DeadLetterConfig": {
             "Arn": {
               "Fn::GetAtt": [
-                "scheduledworkerctrlcompliantscheduledlqAA5D9188",
+                "scheduledworkertestcompliantscheduledlq998B803E",
                 "Arn",
               ],
             },
@@ -623,7 +623,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
           },
           "RoleArn": {
             "Fn::GetAtt": [
-              "scheduledworkerctrlcompliantscheduleschedulerrole44DC5DFA",
+              "scheduledworkertestcompliantscheduleschedulerrole4FFB6669",
               "Arn",
             ],
           },
@@ -631,17 +631,17 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
       },
       "Type": "AWS::Scheduler::Schedule",
     },
-    "scheduledworkerctrlcompliantscheduledlqAA5D9188": {
+    "scheduledworkertestcompliantscheduledlq998B803E": {
       "DeletionPolicy": "Delete",
       "Properties": {
         "MessageRetentionPeriod": 1209600,
-        "QueueName": "ctrl-ctrl-compliant-schedule-dlq",
+        "QueueName": "test-test-compliant-schedule-dlq",
         "SqsManagedSseEnabled": true,
       },
       "Type": "AWS::SQS::Queue",
       "UpdateReplacePolicy": "Delete",
     },
-    "scheduledworkerctrlcompliantscheduledlqPolicy3C33A2E6": {
+    "scheduledworkertestcompliantscheduledlqPolicy8D3EB698": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -658,7 +658,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
               },
               "Resource": {
                 "Fn::GetAtt": [
-                  "scheduledworkerctrlcompliantscheduledlqAA5D9188",
+                  "scheduledworkertestcompliantscheduledlq998B803E",
                   "Arn",
                 ],
               },
@@ -668,13 +668,13 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
         },
         "Queues": [
           {
-            "Ref": "scheduledworkerctrlcompliantscheduledlqAA5D9188",
+            "Ref": "scheduledworkertestcompliantscheduledlq998B803E",
           },
         ],
       },
       "Type": "AWS::SQS::QueuePolicy",
     },
-    "scheduledworkerctrlcompliantscheduleschedulerrole44DC5DFA": {
+    "scheduledworkertestcompliantscheduleschedulerrole4FFB6669": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -689,11 +689,11 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
           "Version": "2012-10-17",
         },
         "Description": "Role for EventBridge Scheduler to invoke compliant-schedule Lambda",
-        "RoleName": "ctrl-compliant-schedule-scheduler-role",
+        "RoleName": "test-compliant-schedule-scheduler-role",
       },
       "Type": "AWS::IAM::Role",
     },
-    "scheduledworkerctrlcompliantscheduleschedulerroleDefaultPolicyBE30A6E5": {
+    "scheduledworkertestcompliantscheduleschedulerroleDefaultPolicy446869C9": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -712,7 +712,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
               "Effect": "Allow",
               "Resource": {
                 "Fn::GetAtt": [
-                  "scheduledworkerctrlcompliantscheduledlqAA5D9188",
+                  "scheduledworkertestcompliantscheduledlq998B803E",
                   "Arn",
                 ],
               },
@@ -720,16 +720,16 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "scheduledworkerctrlcompliantscheduleschedulerroleDefaultPolicyBE30A6E5",
+        "PolicyName": "scheduledworkertestcompliantscheduleschedulerroleDefaultPolicy446869C9",
         "Roles": [
           {
-            "Ref": "scheduledworkerctrlcompliantscheduleschedulerrole44DC5DFA",
+            "Ref": "scheduledworkertestcompliantscheduleschedulerrole4FFB6669",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "workerMetricFilterctrlcompliantworkerMaxMemorySizeE64E42AC": {
+    "workerMetricFiltertestcompliantworkerMaxMemorySizeF71536C5": {
       "Properties": {
         "FilterPattern": "[report_name="REPORT", request_id_name="RequestId:", request_id_value,duration_name="Duration:", duration_value, duration_unit="ms",billed_duration_name_1="Billed",bill_duration_name_2="Duration:", billed_duration_value, billed_duration_unit="ms",memory_size_name_1="Memory", memory_size_name_2="Size:", memory_size_value, memory_size_unit="MB", max_memory_used_name_1="Max", max_memory_used_name_2="Memory", max_memory_used_name_3="Used:", max_memory_used_value, ...]",
         "LogGroupName": {
@@ -737,7 +737,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
         },
         "MetricTransformations": [
           {
-            "MetricName": "ctrl-compliant-worker-MaxMemorySize",
+            "MetricName": "test-compliant-worker-MaxMemorySize",
             "MetricNamespace": "ApplicationService/Lambda",
             "MetricValue": "$memory_size_value",
           },
@@ -745,7 +745,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
       },
       "Type": "AWS::Logs::MetricFilter",
     },
-    "workerMetricFilterctrlcompliantworkerMaxMemoryUsed35757E4E": {
+    "workerMetricFiltertestcompliantworkerMaxMemoryUsed9A42BB5B": {
       "Properties": {
         "FilterPattern": "[report_name="REPORT", request_id_name="RequestId:", request_id_value,duration_name="Duration:", duration_value, duration_unit="ms",billed_duration_name_1="Billed",bill_duration_name_2="Duration:", billed_duration_value, billed_duration_unit="ms",memory_size_name_1="Memory", memory_size_name_2="Size:", memory_size_value, memory_size_unit="MB", max_memory_used_name_1="Max", max_memory_used_name_2="Memory", max_memory_used_name_3="Used:", max_memory_used_value, ...]",
         "LogGroupName": {
@@ -753,7 +753,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
         },
         "MetricTransformations": [
           {
-            "MetricName": "ctrl-compliant-worker-MaxMemoryUsed",
+            "MetricName": "test-compliant-worker-MaxMemoryUsed",
             "MetricNamespace": "ApplicationService/Lambda",
             "MetricValue": "$max_memory_used_value",
           },
@@ -766,16 +766,16 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
       "Properties": {
         "ActionsEnabled": false,
         "AlarmDescription": "This is an auto-cut alarm created by CDK.",
-        "AlarmName": "ctrl-compliant-worker Lambda Error Count",
+        "AlarmName": "test-compliant-worker Lambda Error Count",
         "ComparisonOperator": "GreaterThanThreshold",
         "Dimensions": [
           {
             "Name": "FunctionName",
-            "Value": "ctrl-compliant-worker",
+            "Value": "test-compliant-worker",
           },
         ],
         "EvaluationPeriods": 1,
-        "MetricName": "ctrl-compliant-worker-Errors",
+        "MetricName": "test-compliant-worker-Errors",
         "Namespace": "AWS/Lambda",
         "Period": 60,
         "Statistic": "Sum",
@@ -797,7 +797,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
         "Code": {
           "ZipFile": "exports.handler = async () => ({ statusCode: 200 });",
         },
-        "FunctionName": "ctrl-compliant-worker",
+        "FunctionName": "test-compliant-worker",
         "Handler": "index.handler",
         "LoggingConfig": {
           "LogGroup": {
@@ -820,7 +820,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
     "workerloggroup9EF260EB": {
       "DeletionPolicy": "Delete",
       "Properties": {
-        "LogGroupName": "/aws/lambda/ctrl-compliant-worker",
+        "LogGroupName": "/aws/lambda/test-compliant-worker",
         "RetentionInDays": 365,
       },
       "Type": "AWS::Logs::LogGroup",
@@ -831,7 +831,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
       "Properties": {
         "ActionsEnabled": false,
         "AlarmDescription": "This is an auto-cut alarm created by CDK.",
-        "AlarmName": "ctrl-compliant-worker Memory Utilization Rate",
+        "AlarmName": "test-compliant-worker Memory Utilization Rate",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "EvaluationPeriods": 3,
         "Metrics": [
@@ -845,7 +845,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
             "Id": "memoryUsed",
             "MetricStat": {
               "Metric": {
-                "MetricName": "ctrl-compliant-worker-MaxMemoryUsed",
+                "MetricName": "test-compliant-worker-MaxMemoryUsed",
                 "Namespace": "AWS/Lambda",
               },
               "Period": 60,
@@ -857,7 +857,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
             "Id": "memorySize",
             "MetricStat": {
               "Metric": {
-                "MetricName": "ctrl-compliant-worker-MaxMemorySize",
+                "MetricName": "test-compliant-worker-MaxMemorySize",
                 "Namespace": "ApplicationService/Lambda",
               },
               "Period": 60,
@@ -900,7 +900,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
           ],
           "Version": "2012-10-17",
         },
-        "RoleName": "ctrl-compliant-worker-role",
+        "RoleName": "test-compliant-worker-role",
       },
       "Type": "AWS::IAM::Role",
     },
@@ -986,7 +986,7 @@ exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`
 }
 `;
 
-exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 1`] = `
+exports[`example stage CloudFormation snapshots test-messaging matches snapshot 1`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -1006,11 +1006,11 @@ exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 
           ],
         },
         "MessageRetentionPeriod": 1209600,
-        "QueueName": "ctrl-compliant-events",
+        "QueueName": "test-compliant-events",
         "RedrivePolicy": {
           "deadLetterTargetArn": {
             "Fn::GetAtt": [
-              "eventsqueuectrlcomplianteventsdlq7A2FFA55",
+              "eventsqueuetestcomplianteventsdlq27C7D3BF",
               "Arn",
             ],
           },
@@ -1053,60 +1053,12 @@ exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 
       },
       "Type": "AWS::SQS::QueuePolicy",
     },
-    "eventsqueuectrlcomplianteventsdlq7A2FFA55": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "KmsMasterKeyId": {
-          "Fn::GetAtt": [
-            "messagingkey78D6085F",
-            "Arn",
-          ],
-        },
-        "MessageRetentionPeriod": 1209600,
-        "QueueName": "ctrl-ctrl-compliant-events-dlq",
-      },
-      "Type": "AWS::SQS::Queue",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "eventsqueuectrlcomplianteventsdlqPolicyC855C0F6": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sqs:*",
-              "Condition": {
-                "Bool": {
-                  "aws:SecureTransport": "false",
-                },
-              },
-              "Effect": "Deny",
-              "Principal": {
-                "AWS": "*",
-              },
-              "Resource": {
-                "Fn::GetAtt": [
-                  "eventsqueuectrlcomplianteventsdlq7A2FFA55",
-                  "Arn",
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "Queues": [
-          {
-            "Ref": "eventsqueuectrlcomplianteventsdlq7A2FFA55",
-          },
-        ],
-      },
-      "Type": "AWS::SQS::QueuePolicy",
-    },
     "eventsqueuemessagedoesflowalarmEEEA56FE": {
       "DeletionPolicy": "Delete",
       "Properties": {
         "ActionsEnabled": false,
         "AlarmDescription": "This is an auto-cut alarm created by CDK.",
-        "AlarmName": "ctrl-compliant-events-message-do-flow-alarm",
+        "AlarmName": "test-compliant-events-message-do-flow-alarm",
         "ComparisonOperator": "LessThanOrEqualToThreshold",
         "EvaluationPeriods": 1,
         "Metrics": [
@@ -1123,7 +1075,7 @@ exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 
                 "Dimensions": [
                   {
                     "Name": "QueueName",
-                    "Value": "ctrl-compliant-events",
+                    "Value": "test-compliant-events",
                   },
                 ],
                 "MetricName": "NumberOfMessagesReceived",
@@ -1141,7 +1093,7 @@ exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 
                 "Dimensions": [
                   {
                     "Name": "QueueName",
-                    "Value": "ctrl-compliant-events",
+                    "Value": "test-compliant-events",
                   },
                 ],
                 "MetricName": "NumberOfMessagesDeleted",
@@ -1159,6 +1111,54 @@ exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 
       "Type": "AWS::CloudWatch::Alarm",
       "UpdateReplacePolicy": "Delete",
     },
+    "eventsqueuetestcomplianteventsdlq27C7D3BF": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "KmsMasterKeyId": {
+          "Fn::GetAtt": [
+            "messagingkey78D6085F",
+            "Arn",
+          ],
+        },
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "test-test-compliant-events-dlq",
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "eventsqueuetestcomplianteventsdlqPolicy39492CE5": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "eventsqueuetestcomplianteventsdlq27C7D3BF",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "eventsqueuetestcomplianteventsdlq27C7D3BF",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
     "eventstopic475FD275": {
       "Properties": {
         "KmsMasterKeyId": {
@@ -1167,7 +1167,7 @@ exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 
             "Arn",
           ],
         },
-        "TopicName": "ctrl-compliant-events",
+        "TopicName": "test-compliant-events",
       },
       "Type": "AWS::SNS::Topic",
     },
@@ -1234,7 +1234,7 @@ exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 
     },
     "messagingkeyAlias513F4003": {
       "Properties": {
-        "AliasName": "alias/ctrl-dev-us-east-1-compliant-messaging",
+        "AliasName": "alias/test-dev-us-east-1-compliant-messaging",
         "TargetKeyId": {
           "Fn::GetAtt": [
             "messagingkey78D6085F",
@@ -1275,7 +1275,7 @@ exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 
 }
 `;
 
-exports[`example stage CloudFormation snapshots ctrl-network matches snapshot 1`] = `
+exports[`example stage CloudFormation snapshots test-network matches snapshot 1`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -1740,7 +1740,7 @@ exports[`example stage CloudFormation snapshots ctrl-network matches snapshot 1`
 }
 `;
 
-exports[`example stage CloudFormation snapshots ctrl-storage matches snapshot 1`] = `
+exports[`example stage CloudFormation snapshots test-storage matches snapshot 1`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -2179,7 +2179,7 @@ exports[`example stage CloudFormation snapshots ctrl-storage matches snapshot 1`
     },
     "datakeyAliasB2200EAD": {
       "Properties": {
-        "AliasName": "alias/ctrl-dev-us-east-1-compliant-data",
+        "AliasName": "alias/test-dev-us-east-1-compliant-data",
         "TargetKeyId": {
           "Fn::GetAtt": [
             "datakeyF9711107",
@@ -2251,7 +2251,7 @@ exports[`example stage CloudFormation snapshots ctrl-storage matches snapshot 1`
           "SSEType": "KMS",
         },
         "TableClass": "STANDARD",
-        "TableName": "ctrl-compliant-data",
+        "TableName": "test-compliant-data",
       },
       "Type": "AWS::DynamoDB::Table",
       "UpdateReplacePolicy": "Delete",
@@ -2261,12 +2261,12 @@ exports[`example stage CloudFormation snapshots ctrl-storage matches snapshot 1`
       "Properties": {
         "ActionsEnabled": false,
         "AlarmDescription": "This is an auto-cut alarm created by CDK.",
-        "AlarmName": "DynamoDB-ctrl-compliant-data-SystemErrors",
+        "AlarmName": "DynamoDB-test-compliant-data-SystemErrors",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
             "Name": "TableName",
-            "Value": "ctrl-compliant-data",
+            "Value": "test-compliant-data",
           },
         ],
         "EvaluationPeriods": 1,
