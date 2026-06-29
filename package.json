@@ -61,7 +61,7 @@
         "@types/node": "22.7.9",
         "aws-cdk": "2.1030.0",
         "aws-cdk-lib": "^2.202.0",
-        "cdk-nag": "^2.37.51",
+        "cdk-nag": "^3.0.1",
         "constructs": "^10.4.5",
         "jest": "^29.7.0",
         "ts-jest": "^29.2.5",
