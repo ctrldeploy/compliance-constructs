@@ -1389,16 +1389,6 @@ exports[`example stage CloudFormation snapshots test-network matches snapshot 1`
                 ],
               },
             },
-            {
-              "Action": "iam:PassRole",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "compliantvpccloudwatchflowlogIAMRole45E9009F",
-                  "Arn",
-                ],
-              },
-            },
           ],
           "Version": "2012-10-17",
         },
@@ -1797,7 +1787,7 @@ exports[`example stage CloudFormation snapshots test-storage matches snapshot 1`
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
