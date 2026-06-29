@@ -4,6 +4,10 @@ import { applyComplianceChecks } from '../lib/compliance/aspect';
 import { DEV } from '../lib/config/stages';
 import { ExampleStage } from '../lib/deployments/pipeline';
 
+// Pin the DEV disambiguator so synthesis is deterministic across environments
+// (the personal-stage disambiguator defaults to process.env.USER).
+process.env.USER = 'test';
+
 /**
  * The compliance gate: synthesize the full example stage with the cdk-nag
  * AwsSolutions aspect attached and assert that no stack has any unsuppressed

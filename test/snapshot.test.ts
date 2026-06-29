@@ -3,6 +3,11 @@ import { Template } from 'aws-cdk-lib/assertions';
 import { DEV } from '../lib/config/stages';
 import { ExampleStage } from '../lib/deployments/pipeline';
 
+// Pin the DEV disambiguator so synthesized resource names are deterministic
+// across environments (the personal-stage disambiguator defaults to
+// process.env.USER, which differs between a laptop and a CI runner).
+process.env.USER = 'test';
+
 /**
  * Snapshot the synthesized templates so unintended infrastructure drift in the
  * compliant constructs is caught in review. Re-run with `jest -u` to update the
