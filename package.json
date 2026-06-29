@@ -1,0 +1,71 @@
+{
+    "name": "compliance-constructs",
+    "version": "0.1.0",
+    "description": "Reusable AWS CDK constructs with SOC 2 safeguards pre-configured and validated by cdk-nag.",
+    "license": "MIT",
+    "author": "Sanjay Shukla",
+    "homepage": "https://github.com/ctrldeploy/compliance-constructs#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ctrldeploy/compliance-constructs.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ctrldeploy/compliance-constructs/issues"
+    },
+    "keywords": [
+        "cdk",
+        "aws-cdk",
+        "awscdk",
+        "aws",
+        "soc2",
+        "compliance",
+        "cdk-nag",
+        "security",
+        "infrastructure-as-code"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "engines": {
+        "node": ">=18"
+    },
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "clean": "rm -rf dist/ cdk.out/",
+        "cdk": "cdk",
+        "synth": "cdk synth",
+        "test": "jest",
+        "test:nag": "jest compliance",
+        "format": "biome format --write .",
+        "lint": "biome lint --write .",
+        "typecheck": "tsc --noEmit",
+        "check": "npm run typecheck && biome check --write .",
+        "ci": "npm run typecheck && biome ci . && npm test",
+        "prepublishOnly": "npm run build"
+    },
+    "peerDependencies": {
+        "aws-cdk-lib": "^2.202.0",
+        "cdk-nag": "^2.37.0",
+        "constructs": "^10.4.5"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "2.2.6",
+        "@types/jest": "^29.5.14",
+        "@types/node": "22.7.9",
+        "aws-cdk": "2.1030.0",
+        "aws-cdk-lib": "^2.202.0",
+        "cdk-nag": "^2.37.51",
+        "constructs": "^10.4.5",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.2.5",
+        "ts-node": "^10.9.2",
+        "typescript": "~5.6.3"
+    }
+}

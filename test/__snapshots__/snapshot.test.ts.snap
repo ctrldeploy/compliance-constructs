@@ -1,0 +1,2312 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`example stage CloudFormation snapshots ctrl-api matches snapshot 1`] = `
+{
+  "Outputs": {
+    "compliantapiEndpoint02CC07C5": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "compliantapiD755A3EC",
+            },
+            ".execute-api.us-east-1.",
+            {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            {
+              "Ref": "compliantapiDeploymentStageprod30B8C81D",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "compliantapiAccountDD60CCD6": {
+      "DeletionPolicy": "Retain",
+      "DependsOn": [
+        "compliantapiD755A3EC",
+      ],
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "API Gateway requires the AWS-managed AmazonAPIGatewayPushToCloudWatchLogs policy on its account-level role to deliver execution/access logs; this is the AWS-prescribed mechanism for the logging control itself.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "CloudWatchRoleArn": {
+          "Fn::GetAtt": [
+            "compliantapiCloudWatchRole2911C520",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "compliantapiCloudWatchRole2911C520": {
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "API Gateway requires the AWS-managed AmazonAPIGatewayPushToCloudWatchLogs policy on its account-level role to deliver execution/access logs; this is the AWS-prescribed mechanism for the logging control itself.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "compliantapiD755A3EC": {
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "API Gateway requires the AWS-managed AmazonAPIGatewayPushToCloudWatchLogs policy on its account-level role to deliver execution/access logs; this is the AWS-prescribed mechanism for the logging control itself.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "Name": "compliant-api",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "compliantapiDeployment647C658F53bf5bbdb3ce0b270beb7ace2d52483c": {
+      "DependsOn": [
+        "compliantapidefaultvalidator0B6534C4",
+        "compliantapiGET33D65FBC",
+      ],
+      "Metadata": {
+        "aws:cdk:do-not-refactor": true,
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "API Gateway requires the AWS-managed AmazonAPIGatewayPushToCloudWatchLogs policy on its account-level role to deliver execution/access logs; this is the AWS-prescribed mechanism for the logging control itself.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": {
+          "Ref": "compliantapiD755A3EC",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "compliantapiDeploymentStageprod30B8C81D": {
+      "DependsOn": [
+        "compliantapiAccountDD60CCD6",
+      ],
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "API Gateway requires the AWS-managed AmazonAPIGatewayPushToCloudWatchLogs policy on its account-level role to deliver execution/access logs; this is the AWS-prescribed mechanism for the logging control itself.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "AccessLogSetting": {
+          "DestinationArn": {
+            "Fn::GetAtt": [
+              "compliantapiaccesslogs75AB854C",
+              "Arn",
+            ],
+          },
+          "Format": "{"requestId":"$context.requestId","ip":"$context.identity.sourceIp","user":"$context.identity.user","caller":"$context.identity.caller","requestTime":"$context.requestTime","httpMethod":"$context.httpMethod","resourcePath":"$context.resourcePath","status":"$context.status","protocol":"$context.protocol","responseLength":"$context.responseLength"}",
+        },
+        "DeploymentId": {
+          "Ref": "compliantapiDeployment647C658F53bf5bbdb3ce0b270beb7ace2d52483c",
+        },
+        "MethodSettings": [
+          {
+            "DataTraceEnabled": false,
+            "HttpMethod": "*",
+            "LoggingLevel": "INFO",
+            "MetricsEnabled": true,
+            "ResourcePath": "/*",
+          },
+        ],
+        "RestApiId": {
+          "Ref": "compliantapiD755A3EC",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "compliantapiGET33D65FBC": {
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "API Gateway requires the AWS-managed AmazonAPIGatewayPushToCloudWatchLogs policy on its account-level role to deliver execution/access logs; this is the AWS-prescribed mechanism for the logging control itself.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "AuthorizationType": "AWS_IAM",
+        "HttpMethod": "GET",
+        "Integration": {
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+            },
+          ],
+          "PassthroughBehavior": "NEVER",
+          "RequestTemplates": {
+            "application/json": "{ "statusCode": 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+          },
+        ],
+        "RequestValidatorId": {
+          "Ref": "compliantapidefaultvalidator0B6534C4",
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "compliantapiD755A3EC",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": {
+          "Ref": "compliantapiD755A3EC",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "compliantapiaccesslogs75AB854C": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "RetentionInDays": 365,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "compliantapidefaultvalidator0B6534C4": {
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "API Gateway requires the AWS-managed AmazonAPIGatewayPushToCloudWatchLogs policy on its account-level role to deliver execution/access logs; this is the AWS-prescribed mechanism for the logging control itself.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "RestApiId": {
+          "Ref": "compliantapiD755A3EC",
+        },
+        "ValidateRequestBody": true,
+        "ValidateRequestParameters": true,
+      },
+      "Type": "AWS::ApiGateway::RequestValidator",
+    },
+    "compliantapiwebaclE24092EE": {
+      "Properties": {
+        "DefaultAction": {
+          "Allow": {},
+        },
+        "Rules": [
+          {
+            "Name": "AWSManagedRulesCommonRuleSet",
+            "OverrideAction": {
+              "None": {},
+            },
+            "Priority": 0,
+            "Statement": {
+              "ManagedRuleGroupStatement": {
+                "Name": "AWSManagedRulesCommonRuleSet",
+                "VendorName": "AWS",
+              },
+            },
+            "VisibilityConfig": {
+              "CloudWatchMetricsEnabled": true,
+              "MetricName": "AWSManagedRulesCommonRuleSet",
+              "SampledRequestsEnabled": true,
+            },
+          },
+        ],
+        "Scope": "REGIONAL",
+        "VisibilityConfig": {
+          "CloudWatchMetricsEnabled": true,
+          "MetricName": "ctrl-compliant-api-waf",
+          "SampledRequestsEnabled": true,
+        },
+      },
+      "Type": "AWS::WAFv2::WebACL",
+    },
+    "compliantapiwebaclassociationAA4CB306": {
+      "Properties": {
+        "ResourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":apigateway:us-east-1::/restapis/",
+              {
+                "Ref": "compliantapiD755A3EC",
+              },
+              "/stages/",
+              {
+                "Ref": "compliantapiDeploymentStageprod30B8C81D",
+              },
+            ],
+          ],
+        },
+        "WebACLArn": {
+          "Fn::GetAtt": [
+            "compliantapiwebaclE24092EE",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::WAFv2::WebACLAssociation",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`example stage CloudFormation snapshots ctrl-compute matches snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "scheduledworkercompliantscheduledworkerMetricFilterctrlcompliantscheduledworkerMaxMemorySize2D0F9DCB": {
+      "Properties": {
+        "FilterPattern": "[report_name="REPORT", request_id_name="RequestId:", request_id_value,duration_name="Duration:", duration_value, duration_unit="ms",billed_duration_name_1="Billed",bill_duration_name_2="Duration:", billed_duration_value, billed_duration_unit="ms",memory_size_name_1="Memory", memory_size_name_2="Size:", memory_size_value, memory_size_unit="MB", max_memory_used_name_1="Max", max_memory_used_name_2="Memory", max_memory_used_name_3="Used:", max_memory_used_value, ...]",
+        "LogGroupName": {
+          "Ref": "scheduledworkercompliantscheduledworkerloggroupFF931A4D",
+        },
+        "MetricTransformations": [
+          {
+            "MetricName": "ctrl-compliant-scheduled-worker-MaxMemorySize",
+            "MetricNamespace": "ApplicationService/Lambda",
+            "MetricValue": "$memory_size_value",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::MetricFilter",
+    },
+    "scheduledworkercompliantscheduledworkerMetricFilterctrlcompliantscheduledworkerMaxMemoryUsedE578FC76": {
+      "Properties": {
+        "FilterPattern": "[report_name="REPORT", request_id_name="RequestId:", request_id_value,duration_name="Duration:", duration_value, duration_unit="ms",billed_duration_name_1="Billed",bill_duration_name_2="Duration:", billed_duration_value, billed_duration_unit="ms",memory_size_name_1="Memory", memory_size_name_2="Size:", memory_size_value, memory_size_unit="MB", max_memory_used_name_1="Max", max_memory_used_name_2="Memory", max_memory_used_name_3="Used:", max_memory_used_value, ...]",
+        "LogGroupName": {
+          "Ref": "scheduledworkercompliantscheduledworkerloggroupFF931A4D",
+        },
+        "MetricTransformations": [
+          {
+            "MetricName": "ctrl-compliant-scheduled-worker-MaxMemoryUsed",
+            "MetricNamespace": "ApplicationService/Lambda",
+            "MetricValue": "$max_memory_used_value",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::MetricFilter",
+    },
+    "scheduledworkercompliantscheduledworkererrorcountalarmF6A1D6FD": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ActionsEnabled": false,
+        "AlarmDescription": "This is an auto-cut alarm created by CDK.",
+        "AlarmName": "ctrl-compliant-scheduled-worker Lambda Error Count",
+        "ComparisonOperator": "GreaterThanThreshold",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": "ctrl-compliant-scheduled-worker",
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ctrl-compliant-scheduled-worker-Errors",
+        "Namespace": "AWS/Lambda",
+        "Period": 60,
+        "Statistic": "Sum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "scheduledworkercompliantscheduledworkerfunction191A5F96": {
+      "DependsOn": [
+        "scheduledworkercompliantscheduledworkerroleDefaultPolicy6E3D71AF",
+        "scheduledworkercompliantscheduledworkerroleB680C4EC",
+      ],
+      "Properties": {
+        "Architectures": [
+          "arm64",
+        ],
+        "Code": {
+          "ZipFile": "exports.handler = async () => ({ statusCode: 200 });",
+        },
+        "FunctionName": "ctrl-compliant-scheduled-worker",
+        "Handler": "index.handler",
+        "LoggingConfig": {
+          "LogGroup": {
+            "Ref": "scheduledworkercompliantscheduledworkerloggroupFF931A4D",
+          },
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "scheduledworkercompliantscheduledworkerroleB680C4EC",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs22.x",
+        "TracingConfig": {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "scheduledworkercompliantscheduledworkerloggroupFF931A4D": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/ctrl-compliant-scheduled-worker",
+        "RetentionInDays": 365,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "scheduledworkercompliantscheduledworkermemoryutilizationalarm50194AAA": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ActionsEnabled": false,
+        "AlarmDescription": "This is an auto-cut alarm created by CDK.",
+        "AlarmName": "ctrl-compliant-scheduled-worker Memory Utilization Rate",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "EvaluationPeriods": 3,
+        "Metrics": [
+          {
+            "Expression": "memoryUsed*100/memorySize",
+            "Id": "expr_1",
+            "Label": "Rates (in %)",
+            "ReturnData": true,
+          },
+          {
+            "Id": "memoryUsed",
+            "MetricStat": {
+              "Metric": {
+                "MetricName": "ctrl-compliant-scheduled-worker-MaxMemoryUsed",
+                "Namespace": "AWS/Lambda",
+              },
+              "Period": 60,
+              "Stat": "Average",
+            },
+            "ReturnData": false,
+          },
+          {
+            "Id": "memorySize",
+            "MetricStat": {
+              "Metric": {
+                "MetricName": "ctrl-compliant-scheduled-worker-MaxMemorySize",
+                "Namespace": "ApplicationService/Lambda",
+              },
+              "Period": 60,
+              "Stat": "Average",
+            },
+            "ReturnData": false,
+          },
+        ],
+        "Threshold": 80,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "scheduledworkercompliantscheduledworkerroleB680C4EC": {
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "Active X-Ray tracing attaches the AWS-managed AWSXRayDaemonWriteAccess policy; X-Ray write actions are not resource-scopable and this is the AWS-recommended baseline for tracing (SOC 2 observability).",
+            },
+            {
+              "id": "AwsSolutions-IAM5",
+              "reason": "X-Ray PutTraceSegments / PutTelemetryRecords only accept a "*" resource by AWS design; the wildcard is intrinsic to the action, not over-broad access.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "RoleName": "ctrl-compliant-scheduled-worker-role",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "scheduledworkercompliantscheduledworkerroleDefaultPolicy6E3D71AF": {
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "Active X-Ray tracing attaches the AWS-managed AWSXRayDaemonWriteAccess policy; X-Ray write actions are not resource-scopable and this is the AWS-recommended baseline for tracing (SOC 2 observability).",
+            },
+            {
+              "id": "AwsSolutions-IAM5",
+              "reason": "X-Ray PutTraceSegments / PutTelemetryRecords only accept a "*" resource by AWS design; the wildcard is intrinsic to the action, not over-broad access.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "scheduledworkercompliantscheduledworkerloggroupFF931A4D",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "scheduledworkercompliantscheduledworkerroleDefaultPolicy6E3D71AF",
+        "Roles": [
+          {
+            "Ref": "scheduledworkercompliantscheduledworkerroleB680C4EC",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "scheduledworkerctrlcompliantschedule7005BEE9": {
+      "Properties": {
+        "Description": "Triggers the compliant-schedule Lambda on a schedule",
+        "FlexibleTimeWindow": {
+          "MaximumWindowInMinutes": 5,
+          "Mode": "FLEXIBLE",
+        },
+        "Name": "compliant-schedule-ctrl",
+        "ScheduleExpression": "rate(1 hour)",
+        "ScheduleExpressionTimezone": "UTC",
+        "State": "ENABLED",
+        "Target": {
+          "Arn": {
+            "Fn::GetAtt": [
+              "scheduledworkercompliantscheduledworkerfunction191A5F96",
+              "Arn",
+            ],
+          },
+          "DeadLetterConfig": {
+            "Arn": {
+              "Fn::GetAtt": [
+                "scheduledworkerctrlcompliantscheduledlqAA5D9188",
+                "Arn",
+              ],
+            },
+          },
+          "Input": "{"source":"eventbridge-scheduler","scheduleName":"compliant-schedule"}",
+          "RetryPolicy": {
+            "MaximumRetryAttempts": 3,
+          },
+          "RoleArn": {
+            "Fn::GetAtt": [
+              "scheduledworkerctrlcompliantscheduleschedulerrole44DC5DFA",
+              "Arn",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::Scheduler::Schedule",
+    },
+    "scheduledworkerctrlcompliantscheduledlqAA5D9188": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "ctrl-ctrl-compliant-schedule-dlq",
+        "SqsManagedSseEnabled": true,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "scheduledworkerctrlcompliantscheduledlqPolicy3C33A2E6": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "scheduledworkerctrlcompliantscheduledlqAA5D9188",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "scheduledworkerctrlcompliantscheduledlqAA5D9188",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "scheduledworkerctrlcompliantscheduleschedulerrole44DC5DFA": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "scheduler.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "Role for EventBridge Scheduler to invoke compliant-schedule Lambda",
+        "RoleName": "ctrl-compliant-schedule-scheduler-role",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "scheduledworkerctrlcompliantscheduleschedulerroleDefaultPolicyBE30A6E5": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "scheduledworkercompliantscheduledworkerfunction191A5F96",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "scheduledworkerctrlcompliantscheduledlqAA5D9188",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "scheduledworkerctrlcompliantscheduleschedulerroleDefaultPolicyBE30A6E5",
+        "Roles": [
+          {
+            "Ref": "scheduledworkerctrlcompliantscheduleschedulerrole44DC5DFA",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "workerMetricFilterctrlcompliantworkerMaxMemorySizeE64E42AC": {
+      "Properties": {
+        "FilterPattern": "[report_name="REPORT", request_id_name="RequestId:", request_id_value,duration_name="Duration:", duration_value, duration_unit="ms",billed_duration_name_1="Billed",bill_duration_name_2="Duration:", billed_duration_value, billed_duration_unit="ms",memory_size_name_1="Memory", memory_size_name_2="Size:", memory_size_value, memory_size_unit="MB", max_memory_used_name_1="Max", max_memory_used_name_2="Memory", max_memory_used_name_3="Used:", max_memory_used_value, ...]",
+        "LogGroupName": {
+          "Ref": "workerloggroup9EF260EB",
+        },
+        "MetricTransformations": [
+          {
+            "MetricName": "ctrl-compliant-worker-MaxMemorySize",
+            "MetricNamespace": "ApplicationService/Lambda",
+            "MetricValue": "$memory_size_value",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::MetricFilter",
+    },
+    "workerMetricFilterctrlcompliantworkerMaxMemoryUsed35757E4E": {
+      "Properties": {
+        "FilterPattern": "[report_name="REPORT", request_id_name="RequestId:", request_id_value,duration_name="Duration:", duration_value, duration_unit="ms",billed_duration_name_1="Billed",bill_duration_name_2="Duration:", billed_duration_value, billed_duration_unit="ms",memory_size_name_1="Memory", memory_size_name_2="Size:", memory_size_value, memory_size_unit="MB", max_memory_used_name_1="Max", max_memory_used_name_2="Memory", max_memory_used_name_3="Used:", max_memory_used_value, ...]",
+        "LogGroupName": {
+          "Ref": "workerloggroup9EF260EB",
+        },
+        "MetricTransformations": [
+          {
+            "MetricName": "ctrl-compliant-worker-MaxMemoryUsed",
+            "MetricNamespace": "ApplicationService/Lambda",
+            "MetricValue": "$max_memory_used_value",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::MetricFilter",
+    },
+    "workererrorcountalarm6A1A516C": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ActionsEnabled": false,
+        "AlarmDescription": "This is an auto-cut alarm created by CDK.",
+        "AlarmName": "ctrl-compliant-worker Lambda Error Count",
+        "ComparisonOperator": "GreaterThanThreshold",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": "ctrl-compliant-worker",
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ctrl-compliant-worker-Errors",
+        "Namespace": "AWS/Lambda",
+        "Period": 60,
+        "Statistic": "Sum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "workerfunction65B121BB": {
+      "DependsOn": [
+        "workerroleDefaultPolicyD835975E",
+        "workerroleA3539D2A",
+      ],
+      "Properties": {
+        "Architectures": [
+          "arm64",
+        ],
+        "Code": {
+          "ZipFile": "exports.handler = async () => ({ statusCode: 200 });",
+        },
+        "FunctionName": "ctrl-compliant-worker",
+        "Handler": "index.handler",
+        "LoggingConfig": {
+          "LogGroup": {
+            "Ref": "workerloggroup9EF260EB",
+          },
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "workerroleA3539D2A",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs22.x",
+        "TracingConfig": {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "workerloggroup9EF260EB": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/ctrl-compliant-worker",
+        "RetentionInDays": 365,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "workermemoryutilizationalarmC5EB0F19": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ActionsEnabled": false,
+        "AlarmDescription": "This is an auto-cut alarm created by CDK.",
+        "AlarmName": "ctrl-compliant-worker Memory Utilization Rate",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "EvaluationPeriods": 3,
+        "Metrics": [
+          {
+            "Expression": "memoryUsed*100/memorySize",
+            "Id": "expr_1",
+            "Label": "Rates (in %)",
+            "ReturnData": true,
+          },
+          {
+            "Id": "memoryUsed",
+            "MetricStat": {
+              "Metric": {
+                "MetricName": "ctrl-compliant-worker-MaxMemoryUsed",
+                "Namespace": "AWS/Lambda",
+              },
+              "Period": 60,
+              "Stat": "Average",
+            },
+            "ReturnData": false,
+          },
+          {
+            "Id": "memorySize",
+            "MetricStat": {
+              "Metric": {
+                "MetricName": "ctrl-compliant-worker-MaxMemorySize",
+                "Namespace": "ApplicationService/Lambda",
+              },
+              "Period": 60,
+              "Stat": "Average",
+            },
+            "ReturnData": false,
+          },
+        ],
+        "Threshold": 80,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "workerroleA3539D2A": {
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "Active X-Ray tracing attaches the AWS-managed AWSXRayDaemonWriteAccess policy; X-Ray write actions are not resource-scopable and this is the AWS-recommended baseline for tracing (SOC 2 observability).",
+            },
+            {
+              "id": "AwsSolutions-IAM5",
+              "reason": "X-Ray PutTraceSegments / PutTelemetryRecords only accept a "*" resource by AWS design; the wildcard is intrinsic to the action, not over-broad access.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "RoleName": "ctrl-compliant-worker-role",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "workerroleDefaultPolicyD835975E": {
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "Active X-Ray tracing attaches the AWS-managed AWSXRayDaemonWriteAccess policy; X-Ray write actions are not resource-scopable and this is the AWS-recommended baseline for tracing (SOC 2 observability).",
+            },
+            {
+              "id": "AwsSolutions-IAM5",
+              "reason": "X-Ray PutTraceSegments / PutTelemetryRecords only accept a "*" resource by AWS design; the wildcard is intrinsic to the action, not over-broad access.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "workerloggroup9EF260EB",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "workerroleDefaultPolicyD835975E",
+        "Roles": [
+          {
+            "Ref": "workerroleA3539D2A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`example stage CloudFormation snapshots ctrl-messaging matches snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "eventsqueue642F3F4B": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "KmsMasterKeyId": {
+          "Fn::GetAtt": [
+            "messagingkey78D6085F",
+            "Arn",
+          ],
+        },
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "ctrl-compliant-events",
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {
+            "Fn::GetAtt": [
+              "eventsqueuectrlcomplianteventsdlq7A2FFA55",
+              "Arn",
+            ],
+          },
+          "maxReceiveCount": 5,
+        },
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "eventsqueuePolicyF6DE5685": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "eventsqueue642F3F4B",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "eventsqueue642F3F4B",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "eventsqueuectrlcomplianteventsdlq7A2FFA55": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "KmsMasterKeyId": {
+          "Fn::GetAtt": [
+            "messagingkey78D6085F",
+            "Arn",
+          ],
+        },
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "ctrl-ctrl-compliant-events-dlq",
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "eventsqueuectrlcomplianteventsdlqPolicyC855C0F6": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "eventsqueuectrlcomplianteventsdlq7A2FFA55",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "eventsqueuectrlcomplianteventsdlq7A2FFA55",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "eventsqueuemessagedoesflowalarmEEEA56FE": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ActionsEnabled": false,
+        "AlarmDescription": "This is an auto-cut alarm created by CDK.",
+        "AlarmName": "ctrl-compliant-events-message-do-flow-alarm",
+        "ComparisonOperator": "LessThanOrEqualToThreshold",
+        "EvaluationPeriods": 1,
+        "Metrics": [
+          {
+            "Expression": "100 * (messageReceived - messageDeleted) / messageReceived",
+            "Id": "expr_1",
+            "Label": "Message Flow Rate (in %)",
+            "ReturnData": true,
+          },
+          {
+            "Id": "messageReceived",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "QueueName",
+                    "Value": "ctrl-compliant-events",
+                  },
+                ],
+                "MetricName": "NumberOfMessagesReceived",
+                "Namespace": "AWS/SQS",
+              },
+              "Period": 300,
+              "Stat": "Average",
+            },
+            "ReturnData": false,
+          },
+          {
+            "Id": "messageDeleted",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "QueueName",
+                    "Value": "ctrl-compliant-events",
+                  },
+                ],
+                "MetricName": "NumberOfMessagesDeleted",
+                "Namespace": "AWS/SQS",
+              },
+              "Period": 300,
+              "Stat": "Average",
+            },
+            "ReturnData": false,
+          },
+        ],
+        "Threshold": 50,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "eventstopic475FD275": {
+      "Properties": {
+        "KmsMasterKeyId": {
+          "Fn::GetAtt": [
+            "messagingkey78D6085F",
+            "Arn",
+          ],
+        },
+        "TopicName": "ctrl-compliant-events",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "eventstopicPolicyB90102EB": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sns:Publish",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": {
+                "Ref": "eventstopic475FD275",
+              },
+              "Sid": "AllowPublishThroughSSLOnly",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Topics": [
+          {
+            "Ref": "eventstopic475FD275",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::TopicPolicy",
+    },
+    "messagingkey78D6085F": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "EnableKeyRotation": true,
+        "KeyPolicy": {
+          "Statement": [
+            {
+              "Action": "kms:*",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::111111111111:root",
+                    ],
+                  ],
+                },
+              },
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::KMS::Key",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "messagingkeyAlias513F4003": {
+      "Properties": {
+        "AliasName": "alias/ctrl-dev-us-east-1-compliant-messaging",
+        "TargetKeyId": {
+          "Fn::GetAtt": [
+            "messagingkey78D6085F",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::KMS::Alias",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`example stage CloudFormation snapshots ctrl-network matches snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "compliantvpc2C888527": {
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "compliantvpcIGW906A358A": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "compliantvpcVPCGW595C6413": {
+      "Properties": {
+        "InternetGatewayId": {
+          "Ref": "compliantvpcIGW906A358A",
+        },
+        "VpcId": {
+          "Ref": "compliantvpc2C888527",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+    "compliantvpccloudwatchflowlogFlowLogFC15D10A": {
+      "Properties": {
+        "DeliverLogsPermissionArn": {
+          "Fn::GetAtt": [
+            "compliantvpccloudwatchflowlogIAMRole45E9009F",
+            "Arn",
+          ],
+        },
+        "LogDestinationType": "cloud-watch-logs",
+        "LogGroupName": {
+          "Ref": "compliantvpcflowloggroup120E7D56",
+        },
+        "ResourceId": {
+          "Ref": "compliantvpc2C888527",
+        },
+        "ResourceType": "VPC",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/cloudwatch-flow-log",
+          },
+        ],
+        "TrafficType": "ALL",
+      },
+      "Type": "AWS::EC2::FlowLog",
+    },
+    "compliantvpccloudwatchflowlogIAMRole45E9009F": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "vpc-flow-logs.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/cloudwatch-flow-log",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "compliantvpccloudwatchflowlogIAMRoleDefaultPolicy764C01F6": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "compliantvpcflowloggroup120E7D56",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "compliantvpccloudwatchflowlogIAMRole45E9009F",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "compliantvpccloudwatchflowlogIAMRoleDefaultPolicy764C01F6",
+        "Roles": [
+          {
+            "Ref": "compliantvpccloudwatchflowlogIAMRole45E9009F",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "compliantvpcflowloggroup120E7D56": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "RetentionInDays": 365,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "compliantvpcprivateSubnet1DefaultRoute12A4F03C": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "compliantvpcpublicSubnet1NATGateway83FC3953",
+        },
+        "RouteTableId": {
+          "Ref": "compliantvpcprivateSubnet1RouteTable56D62F88",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "compliantvpcprivateSubnet1RouteTable56D62F88": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/privateSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "compliantvpc2C888527",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "compliantvpcprivateSubnet1RouteTableAssociationB06DF38A": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "compliantvpcprivateSubnet1RouteTable56D62F88",
+        },
+        "SubnetId": {
+          "Ref": "compliantvpcprivateSubnet1SubnetAA1E3884",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "compliantvpcprivateSubnet1SubnetAA1E3884": {
+      "Properties": {
+        "AvailabilityZone": "dummy1a",
+        "CidrBlock": "10.0.2.0/24",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/privateSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "compliantvpc2C888527",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "compliantvpcprivateSubnet2DefaultRoute9293FF94": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "compliantvpcpublicSubnet1NATGateway83FC3953",
+        },
+        "RouteTableId": {
+          "Ref": "compliantvpcprivateSubnet2RouteTable3B35F8BE",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "compliantvpcprivateSubnet2RouteTable3B35F8BE": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/privateSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "compliantvpc2C888527",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "compliantvpcprivateSubnet2RouteTableAssociation863B93AE": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "compliantvpcprivateSubnet2RouteTable3B35F8BE",
+        },
+        "SubnetId": {
+          "Ref": "compliantvpcprivateSubnet2SubnetF50D98D5",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "compliantvpcprivateSubnet2SubnetF50D98D5": {
+      "Properties": {
+        "AvailabilityZone": "dummy1b",
+        "CidrBlock": "10.0.3.0/24",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/privateSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "compliantvpc2C888527",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "compliantvpcpublicSubnet1DefaultRoute6CA95884": {
+      "DependsOn": [
+        "compliantvpcVPCGW595C6413",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "compliantvpcIGW906A358A",
+        },
+        "RouteTableId": {
+          "Ref": "compliantvpcpublicSubnet1RouteTable194D8D5C",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "compliantvpcpublicSubnet1EIPA46F1E20": {
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/publicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "compliantvpcpublicSubnet1NATGateway83FC3953": {
+      "DependsOn": [
+        "compliantvpcpublicSubnet1DefaultRoute6CA95884",
+        "compliantvpcpublicSubnet1RouteTableAssociationF2B738D2",
+      ],
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "compliantvpcpublicSubnet1EIPA46F1E20",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "compliantvpcpublicSubnet1Subnet14CE9C49",
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/publicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "compliantvpcpublicSubnet1RouteTable194D8D5C": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/publicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "compliantvpc2C888527",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "compliantvpcpublicSubnet1RouteTableAssociationF2B738D2": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "compliantvpcpublicSubnet1RouteTable194D8D5C",
+        },
+        "SubnetId": {
+          "Ref": "compliantvpcpublicSubnet1Subnet14CE9C49",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "compliantvpcpublicSubnet1Subnet14CE9C49": {
+      "Properties": {
+        "AvailabilityZone": "dummy1a",
+        "CidrBlock": "10.0.0.0/24",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/publicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "compliantvpc2C888527",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "compliantvpcpublicSubnet2DefaultRoute09B947C1": {
+      "DependsOn": [
+        "compliantvpcVPCGW595C6413",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "compliantvpcIGW906A358A",
+        },
+        "RouteTableId": {
+          "Ref": "compliantvpcpublicSubnet2RouteTableE5A29F32",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "compliantvpcpublicSubnet2RouteTableAssociationB5338BB6": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "compliantvpcpublicSubnet2RouteTableE5A29F32",
+        },
+        "SubnetId": {
+          "Ref": "compliantvpcpublicSubnet2Subnet93E17B2F",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "compliantvpcpublicSubnet2RouteTableE5A29F32": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/publicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "compliantvpc2C888527",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "compliantvpcpublicSubnet2Subnet93E17B2F": {
+      "Properties": {
+        "AvailabilityZone": "dummy1b",
+        "CidrBlock": "10.0.1.0/24",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "Name",
+            "Value": "snapshot/network-stack/compliant-vpc/vpc/publicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "compliantvpc2C888527",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`example stage CloudFormation snapshots ctrl-storage matches snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+      "DependsOn": [
+        "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      ],
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "CDK framework-managed custom-resource provider; its role uses the AWS-managed basic Lambda execution policy and is not consumer-configurable.",
+            },
+            {
+              "id": "AwsSolutions-IAM5",
+              "reason": "CDK framework-managed custom-resource provider; wildcards are scoped to the owning resource and generated by CDK, not by application code.",
+            },
+            {
+              "id": "AwsSolutions-L1",
+              "reason": "CDK framework-managed custom-resource provider; its Lambda runtime is pinned and upgraded by the CDK library, not by the consumer.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-111111111111-us-east-1",
+          "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
+        },
+        "Description": {
+          "Fn::Join": [
+            "",
+            [
+              "Lambda function for auto-deleting objects in ",
+              {
+                "Ref": "accesslogsbucket81DD1350",
+              },
+              " S3 bucket.",
+            ],
+          ],
+        },
+        "Handler": "index.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs22.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-IAM4",
+              "reason": "CDK framework-managed custom-resource provider; its role uses the AWS-managed basic Lambda execution policy and is not consumer-configurable.",
+            },
+            {
+              "id": "AwsSolutions-IAM5",
+              "reason": "CDK framework-managed custom-resource provider; wildcards are scoped to the owning resource and generated by CDK, not by application code.",
+            },
+            {
+              "id": "AwsSolutions-L1",
+              "reason": "CDK framework-managed custom-resource provider; its Lambda runtime is pinned and upgraded by the CDK library, not by the consumer.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "accesslogsbucket81DD1350": {
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "cdk_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "AwsSolutions-S1",
+              "reason": "This is the centralized server-access-log destination bucket; an access-log target cannot write its own access logs to itself. SOC 2 logging is satisfied by this bucket being the audit log sink.",
+            },
+          ],
+        },
+      },
+      "Properties": {
+        "AccessControl": "LogDeliveryWrite",
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256",
+              },
+            },
+          ],
+        },
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "NoncurrentVersionExpiration": {
+                "NoncurrentDays": 90,
+              },
+              "NoncurrentVersionTransitions": [
+                {
+                  "StorageClass": "INTELLIGENT_TIERING",
+                  "TransitionInDays": 30,
+                },
+              ],
+              "Status": "Enabled",
+            },
+          ],
+        },
+        "OwnershipControls": {
+          "Rules": [
+            {
+              "ObjectOwnership": "ObjectWriter",
+            },
+          ],
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true,
+        },
+        "Tags": [
+          {
+            "Key": "aws-cdk:auto-delete-objects",
+            "Value": "true",
+          },
+        ],
+        "VersioningConfiguration": {
+          "Status": "Enabled",
+        },
+      },
+      "Type": "AWS::S3::Bucket",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "accesslogsbucketAutoDeleteObjectsCustomResource50326C00": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "accesslogsbucketPolicy8B830B76",
+      ],
+      "Properties": {
+        "BucketName": {
+          "Ref": "accesslogsbucket81DD1350",
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::S3AutoDeleteObjects",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "accesslogsbucketPolicy8B830B76": {
+      "Properties": {
+        "Bucket": {
+          "Ref": "accesslogsbucket81DD1350",
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "accesslogsbucket81DD1350",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "accesslogsbucket81DD1350",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            {
+              "Action": [
+                "s3:PutBucketPolicy",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                    "Arn",
+                  ],
+                },
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "accesslogsbucket81DD1350",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "accesslogsbucket81DD1350",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::S3::BucketPolicy",
+    },
+    "databucketAutoDeleteObjectsCustomResource12ED9483": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "databucketPolicy80C79369",
+      ],
+      "Properties": {
+        "BucketName": {
+          "Ref": "databucketBF19425D",
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::S3AutoDeleteObjects",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "databucketBF19425D": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "BucketKeyEnabled": true,
+              "ServerSideEncryptionByDefault": {
+                "KMSMasterKeyID": {
+                  "Fn::GetAtt": [
+                    "datakeyF9711107",
+                    "Arn",
+                  ],
+                },
+                "SSEAlgorithm": "aws:kms",
+              },
+            },
+          ],
+        },
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "NoncurrentVersionExpiration": {
+                "NoncurrentDays": 90,
+              },
+              "NoncurrentVersionTransitions": [
+                {
+                  "StorageClass": "INTELLIGENT_TIERING",
+                  "TransitionInDays": 30,
+                },
+              ],
+              "Status": "Enabled",
+            },
+          ],
+        },
+        "LoggingConfiguration": {
+          "DestinationBucketName": {
+            "Ref": "accesslogsbucket81DD1350",
+          },
+          "LogFilePrefix": "data-bucket/",
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true,
+        },
+        "Tags": [
+          {
+            "Key": "aws-cdk:auto-delete-objects",
+            "Value": "true",
+          },
+        ],
+        "VersioningConfiguration": {
+          "Status": "Enabled",
+        },
+      },
+      "Type": "AWS::S3::Bucket",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "databucketPolicy80C79369": {
+      "Properties": {
+        "Bucket": {
+          "Ref": "databucketBF19425D",
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "databucketBF19425D",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "databucketBF19425D",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            {
+              "Action": [
+                "s3:PutBucketPolicy",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                    "Arn",
+                  ],
+                },
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "databucketBF19425D",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "databucketBF19425D",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::S3::BucketPolicy",
+    },
+    "datakeyAliasB2200EAD": {
+      "Properties": {
+        "AliasName": "alias/ctrl-dev-us-east-1-compliant-data",
+        "TargetKeyId": {
+          "Fn::GetAtt": [
+            "datakeyF9711107",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::KMS::Alias",
+    },
+    "datakeyF9711107": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "EnableKeyRotation": true,
+        "KeyPolicy": {
+          "Statement": [
+            {
+              "Action": "kms:*",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::111111111111:root",
+                    ],
+                  ],
+                },
+              },
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::KMS::Key",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "datatable3C53B2FC": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "pk",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": [
+          {
+            "AttributeName": "pk",
+            "KeyType": "HASH",
+          },
+        ],
+        "PointInTimeRecoverySpecification": {
+          "PointInTimeRecoveryEnabled": true,
+        },
+        "SSESpecification": {
+          "KMSMasterKeyId": {
+            "Fn::GetAtt": [
+              "datakeyF9711107",
+              "Arn",
+            ],
+          },
+          "SSEEnabled": true,
+          "SSEType": "KMS",
+        },
+        "TableClass": "STANDARD",
+        "TableName": "ctrl-compliant-data",
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "datatablesystemerroralarm28BFF0FF": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ActionsEnabled": false,
+        "AlarmDescription": "This is an auto-cut alarm created by CDK.",
+        "AlarmName": "DynamoDB-ctrl-compliant-data-SystemErrors",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "TableName",
+            "Value": "ctrl-compliant-data",
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "SystemErrors",
+        "Namespace": "AWS/DynamoDB",
+        "Period": 60,
+        "Statistic": "Average",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+      "UpdateReplacePolicy": "Delete",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

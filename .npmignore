@@ -1,0 +1,15 @@
+# Source & tooling — only the compiled dist/ is published (see "files" in package.json)
+lib/
+test/
+*.ts
+!*.d.ts
+tsconfig.json
+jest.config.js
+biome.json
+cdk.json
+cdk.context.json
+
+# Build / CDK artifacts
+cdk.out/
+.cdk.staging/
+*.tsbuildinfo

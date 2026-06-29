@@ -1,0 +1,30 @@
+name: Feature request
+description: Propose a new Compliant* construct or a safeguard enhancement.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / use case
+      description: What SOC 2 control or AWS resource needs covering, and why?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed construct / change
+      description: Which AWS resource would it wrap, and which safeguards would it bake in?
+    validations:
+      required: true
+  - type: textarea
+    id: nag
+    attributes:
+      label: Relevant cdk-nag rules
+      description: Which AwsSolutions-* rules should it satisfy (or which suppression would it justify)?
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: This keeps safeguards in the construct (not the stack) and can pass the cdk-nag gate.
+          required: true

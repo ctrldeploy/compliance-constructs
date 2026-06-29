@@ -1,0 +1,44 @@
+name: Bug report
+description: A Compliant* construct or the example app doesn't behave as documented.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report! For **security vulnerabilities**, do not file here — see [SECURITY.md](../blob/main/SECURITY.md).
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you observe, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: A minimal CDK snippet (or synthesized template excerpt) that shows the problem.
+      render: typescript
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: compliance-constructs version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: cdk-version
+    attributes:
+      label: aws-cdk-lib / cdk-nag versions
+      placeholder: aws-cdk-lib 2.x, cdk-nag 2.x
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I confirmed this is not a misconfiguration from overriding a safe default.
+          required: true
